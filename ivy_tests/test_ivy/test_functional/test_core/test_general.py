@@ -18,6 +18,7 @@ import ivy.functional.backends.jax
 import ivy.functional.backends.tensorflow
 import ivy.functional.backends.torch
 import ivy.functional.backends.mxnet
+import ivy.functional.backends.cupy
 import ivy_tests.test_ivy.helpers as helpers
 import ivy.functional.backends.numpy as ivy_np
 
@@ -44,7 +45,7 @@ def _get_shape_of_list(lst, shape=()):
 # ------#
 
 # set_framework
-@given(fw_str=st.sampled_from(["numpy", "jax", "torch", "mxnet"]))
+@given(fw_str=st.sampled_from(["numpy", "jax", "torch", "mxnet", "cupy"]))
 def test_set_framework(fw_str, device, call):
     ivy.set_backend(fw_str)
     ivy.unset_backend()
@@ -62,7 +63,8 @@ def test_use_within_use_framework(device, call):
         pass
     with ivy.functional.backends.mxnet.use:
         pass
-
+    with ivy.functional.backends.cupy.use:
+        pass
 
 @given(allow_duplicates=st.booleans())
 def test_match_kwargs(allow_duplicates):

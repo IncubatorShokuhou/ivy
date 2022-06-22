@@ -13,7 +13,7 @@ import ivy.functional.backends.jax
 import ivy.functional.backends.tensorflow
 import ivy.functional.backends.torch
 import ivy.functional.backends.mxnet
-
+import ivy.functional.backends.cupy
 
 # dtype objects
 def test_dtype_instances(device, call):

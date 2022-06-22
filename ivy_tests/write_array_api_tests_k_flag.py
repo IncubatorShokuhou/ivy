@@ -18,6 +18,7 @@ framework_tests_to_run = {
     "numpy": list(),
     "torch": list(),
     "tensorflow": list(),
+    "cupy": list(),
 }
 framework_tests_to_skip = {
     "jax": list(),
@@ -25,6 +26,7 @@ framework_tests_to_skip = {
     "numpy": list(),
     "torch": list(),
     "tensorflow": list(),
+    "cupy": list(),
 }
 # add from each filepath
 for fpath in fpaths:

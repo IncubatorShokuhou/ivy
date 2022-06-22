@@ -6,7 +6,7 @@ import ivy
 import ivy_tests.test_ivy.helpers as helpers
 
 
-@pytest.mark.parametrize("backend", ["jax", "numpy", "tensorflow", "torch"])
+@pytest.mark.parametrize("backend", ["jax", "numpy", "tensorflow", "torch", "cupy"])
 def test_docstrings(backend):
     ivy.set_default_device("cpu")
     ivy.set_backend(backend)

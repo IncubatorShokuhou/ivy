@@ -10,6 +10,7 @@ FW_FN_KEYWORDS = {
     "tensorflow": [],
     "torch": [],
     "mxnet": ["ndarray"],
+    "cupy": [],
 }
 
 NATIVE_KEYS_TO_SKIP = {
@@ -29,6 +30,7 @@ NATIVE_KEYS_TO_SKIP = {
         "requires_grad_",
     ],
     "mxnet": [],
+    "cupy": [],
 }
 
 # Helpers #
