@@ -34,6 +34,7 @@ _array_types["jaxlib.xla_extension"] = "ivy.functional.backends.jax"
 _array_types["tensorflow.python.framework.ops"] = "ivy.functional.backends.tensorflow"
 _array_types["torch"] = "ivy.functional.backends.torch"
 _array_types["mxnet.ndarray.ndarray"] = "ivy.functional.backends.mxnet"
+_array_types["cupy"] = "ivy.functional.backends.cupy"
 
 _backend_dict = dict()
 _backend_dict["numpy"] = "ivy.functional.backends.numpy"
@@ -41,6 +42,7 @@ _backend_dict["jax"] = "ivy.functional.backends.jax"
 _backend_dict["tensorflow"] = "ivy.functional.backends.tensorflow"
 _backend_dict["torch"] = "ivy.functional.backends.torch"
 _backend_dict["mxnet"] = "ivy.functional.backends.mxnet"
+_backend_dict["cupy"] = "ivy.functional.backends.cupy"
 
 _backend_reverse_dict = dict()
 _backend_reverse_dict["ivy.functional.backends.numpy"] = "numpy"
@@ -48,7 +50,7 @@ _backend_reverse_dict["ivy.functional.backends.jax"] = "jax"
 _backend_reverse_dict["ivy.functional.backends.tensorflow"] = "tensorflow"
 _backend_reverse_dict["ivy.functional.backends.torch"] = "torch"
 _backend_reverse_dict["ivy.functional.backends.mxnet"] = "mxnet"
-
+_backend_reverse_dict["ivy.functional.backends.cupy"] = "cupy"
 
 # Backend Getting/Setting #
 # ------------------------#
@@ -205,7 +207,7 @@ def get_backend(backend: Optional[str] = None):
     ----------
     backend
         The backend for which we want to retrieve Ivy's backend i.e. one of 'jax',
-        'torch', 'tensorflow', 'numpy', 'mxnet'.
+        'torch', 'tensorflow', 'numpy', 'mxnet', 'cupy'.
 
     Returns
     -------
@@ -380,6 +382,18 @@ def try_import_ivy_numpy(warn=False):
             "ivy.functional.backends.numpy can therefore not be imported.\n".format(e)
         )
 
+def try_import_ivy_cupy(warn=False):
+    try:
+        import ivy.functional.backends.cupy
+
+        return ivy.functional.backends.cupy
+    except (ImportError, ModuleNotFoundError) as e:
+        if not warn:
+            return
+        logging.warning(
+            "{}\n\ncupy does not appear to be installed, "
+            "ivy.functional.backends.cupy can therefore not be imported.\n".format(e)
+        )
 
 FW_DICT = {
     "jax": try_import_ivy_jax,
@@ -387,6 +401,7 @@ FW_DICT = {
     "torch": try_import_ivy_torch,
     "mxnet": try_import_ivy_mxnet,
     "numpy": try_import_ivy_numpy,
+    "cupy": try_import_ivy_cupy,
 }
 
 
